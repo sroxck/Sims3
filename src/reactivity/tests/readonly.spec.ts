@@ -1,10 +1,10 @@
-import { readonly } from "../reactive"
+import { isReadonly, readonly } from "../reactive"
 
 /*
  * @Author: sroxck
  * @Date: 2023-12-03 15:37:39
  * @LastEditors: sroxck
- * @LastEditTime: 2023-12-03 16:08:35
+ * @LastEditTime: 2023-12-04 20:59:43
  * @Description: 
  */
 describe('readonly',()=>{
@@ -15,6 +15,8 @@ describe('readonly',()=>{
     const warpped = readonly(original)
     expect(warpped).not.toBe(original)
     expect(warpped.foo).toBe(1)
+    expect(isReadonly(warpped)).toBe(true)
+    expect(isReadonly(original)).toBe(false)
   })
 
   it('warn then call set',()=>{

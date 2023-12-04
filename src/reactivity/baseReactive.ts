@@ -2,15 +2,22 @@
  * @Author: sroxck
  * @Date: 2023-12-03 15:47:33
  * @LastEditors: sroxck
- * @LastEditTime: 2023-12-03 16:10:29
+ * @LastEditTime: 2023-12-04 20:59:26
  * @Description: 
  */
 import { track, trigger } from "./effect"
+import { ReactiveFlags } from "./reactive"
 const get = createGetter()
 const set = createSetter()
 const readonlyGet = createGetter(true)
 function createGetter(isReadonly = false) {
   return function get(target, key) {
+    if(key  === ReactiveFlags.IS_REACTIVE){
+      return !isReadonly
+    }
+    if(key == ReactiveFlags.IS_READONLY){
+      return isReadonly
+    }
     if (!isReadonly) {
       track(target, key)
     }
